@@ -2,7 +2,8 @@ from flask import render_template, redirect, url_for, flash
 from app import app, db, bcrypt
 from app.models import User
 from app.forms import LoginForm, RegistrationForm
-from flask_login import login_user, current_user, login_required
+from flask_login import login_user, logout_user, current_user, login_required
+
 @app.route('/')
 @login_required
 def index():
@@ -35,7 +36,7 @@ def login():
     return render_template("login.html", form=form)
 @app.route('/logout')
 def logout():
-    login_user()
+    logout_user()
     return redirect(url_for('login'))
 @app.route('/click')
 @login_required
